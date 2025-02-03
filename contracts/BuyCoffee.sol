@@ -31,4 +31,8 @@ contract BuyCoffee {
   function getAllCoffee() public view returns(Coffee[] memory) {
     return coffee;
   }
+
+  function getBalance() public view returns (uint256) {
+    return address(this).balance
+  }
 }
