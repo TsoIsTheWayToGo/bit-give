@@ -33,6 +33,16 @@ contract BuyCoffee {
   }
 
   function getBalance() public view returns (uint256) {
-    return address(this).balance
+    return address(this).balance;
+  }
+
+  function withdraw() public {
+    require (owner == msg.sender, "Caller is not the owner");
+
+    uint256 amount = address(this).balance;
+    require(amount > 0, "No available balance to withdraw.");
+
+    (bool success, ) = owner.call{value: amount}("");
+    require(success, "Withdraw failed"); 
   }
 }
