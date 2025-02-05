@@ -24,9 +24,10 @@ contract BuyCoffee {
 
   function buyCoffee(string memory _message, string memory _name) public payable {
     require(msg.sender.balance >= msg.value, "You don't have enough ETH");
+
+    coffee.push(Coffee(msg.sender, _message, _name, msg.value, block.timestamp));
   }
 
-  coffee.push(Coffee(msg.sender, _message, _name, msg.value, block.timestamp))
 
   function getAllCoffee() public view returns(Coffee[] memory) {
     return coffee;
